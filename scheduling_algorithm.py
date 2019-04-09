@@ -15,4 +15,19 @@ def main():
     planeList = [LF333, LF233, BB456, HL666]
     
     
-def
+def priorityScheduling(planeList):
+    pass
+        
+
+def findWaitTime():
+    pass
+
+
+def findTurnAroundTime():
+    pass
+
+
+def findAvgTime():
+    pass
+
+
