@@ -1,10 +1,10 @@
 class Plane:
     def __init__(self, fuel, capacity, passengers, highPriority):
-        this.fuel = fuel
-        this.capacity = capacity
-        this.passengers = passengers
-        this.highPriorty = highPriority
-        this.waitTime = 0.0
+        self.fuel = fuel
+        self.capacity = capacity
+        self.passengers = passengers
+        self.highPriorty = highPriority
+        self.waitTime = 0.0
 
 def main():
     LF333 = Plane(11.0, 20.0, 24, false)
@@ -15,27 +15,5 @@ def main():
     
     planeList = [LF333, LF233, BB456, HL666]
     
-    priorityScheduling(planeList)
-    
-    
-def priorityScheduling(planeList):
-    planeList = sorted(planeList, key = lambda planeList:planeList[2])
-    print(String(planeList))
-    for plane in planeList:
-        findWaitTime(plane)
-        findTurnAroundTime(plane)
-    findAvgTime(planeList)
-        
-
-def findWaitTime(plane):
-    pass
-
-
-def findTurnAroundTime(plane):
-    pass
-
-
-def findAvgTime(planeList):
-    pass
-
+    priorityScheduling(planeList, len(planeList))
 
