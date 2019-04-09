@@ -9,7 +9,7 @@ class Plane:
         self.waitTime = 0.0
         
     def info(self):
-        breakdown = "ID: {0}".format(id) \
+        breakdown = "ID: {0}".format(self.id) \
             + "Fuel: {0:.2f} \n".format(self.fuel) \
             + "Capacity: {0:.2f} \n".format(self.capacity) \
             + "Passengers: {0:.2f} \n".format(self.passengers) \

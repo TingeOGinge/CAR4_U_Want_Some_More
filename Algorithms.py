@@ -38,12 +38,16 @@ def printScheduleOrder(planeList, scheduleType):
 def priorityScheduling(planeList, n):
     planeList = sorted(planeList, key = lambda planeList:planeList.priority,  
                                                                 reverse = True)
-    printScheduleOrder(planeList, "priority")
-    printResults(planeList, n)
+    return planeList
 
 def firstComeFirstServeScheduling(planeList, n):
     printScheduleOrder(planeList, "FCFS")
     printResults(planeList, n)
+
+def shortestJobFirstNp(planeList, n):
+    planeList = sorted(planeList, key = lambda planeList:planeList.turnAround, 
+                                                                reverse = False)
+    return planeList
     
     
     

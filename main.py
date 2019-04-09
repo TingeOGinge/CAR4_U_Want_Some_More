@@ -11,9 +11,20 @@ def main():
     
     planeList = [LF333, LF233, LF133, BB456, HL666]
     
-    priorityScheduling(planeList[:3], len(planeList[:3]))
-    firstComeFirstServeScheduling(planeList, len(planeList))
+    planeListPriority = priorityScheduling(planeList, len(planeList))
     
+    printScheduleOrder(planeListPriority, "priority")
+    printResults(planeListPriority, len(planeList))
+    
+    planeListHybrid = shortestJobFirstNp(planeList, len(planeList))
+    planeListHybrid = priorityScheduling(planeListHybrid, len(planeList))
+    
+    printScheduleOrder(planeListHybrid, "SJF + Priority")
+    printResults(planeListHybrid, len(planeList))
+    
+    
+    
+     
 main()
     
     
