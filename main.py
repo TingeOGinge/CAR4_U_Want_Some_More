@@ -1,7 +1,8 @@
 from Plane import Plane
-from priorityScheduling import priorityScheduling
-    
+from Algorithms import *
+        
 def main():
+                  #ID,#fuel,#capacity,passengers,priority
     LF333 = Plane("LF333", 11.0, 20.0, 24, 0)
     LF233 = Plane("LF233", 9.0, 21.0, 2, 0)
     LF133 = Plane("LF133", 7.0, 23.0, 12, 0)
@@ -9,9 +10,9 @@ def main():
     HL666 = Plane("HL666", 510.0, 550, 275, 1)
     
     planeList = [LF333, LF233, LF133, BB456, HL666]
-    n = len(planeList)
     
-    priorityScheduling(planeList, n)
+    priorityScheduling(planeList[:3], len(planeList[:3]))
+    firstComeFirstServeScheduling(planeList, len(planeList))
     
 main()
     
