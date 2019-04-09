@@ -74,8 +74,10 @@ main()
     
     
     
-    
-    
+# my assumption is that total process time can be calculated by adding together 
+# passengers * 2 (unboarding and boarding) and capacity - fuel
+# I then replicated the algorithm online using these figures. If you fun this 
+# file in pyzo you should see a nicely formatted output    
     
     
 
