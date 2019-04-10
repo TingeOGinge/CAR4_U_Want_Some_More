@@ -99,8 +99,9 @@ def shortestRemainingTime(planeList):
 def highestResponseRatioNext2(planeList):
     waitingTimes = findWaitingTime(planeList, len(planeList))
     for t in range(len(planeList)):
+        currentPlane = planeList[t]
         planeList[t].priority = \
-        (waitingTimes[t] + planeList[t].turnAround / planeList[t].turnAround)
+        (waitingTimes[t] + currentPlane.turnAround / currentPlane.turnAround)
     planeList = priorityScheduling(planeList)
     return planeList
     
