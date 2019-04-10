@@ -21,20 +21,17 @@ def randSmallPlane():
     return Plane(randID, fuel, capacity, passengers, 0)
 
 # File write for random plane test data
-def fileWrite():
-
-    file = open("test.txt","w")
-    for i in range(50):
-        file.write(str(randSmallPlane())+'\n')
-    file.close()
-
-# File read for random plane test data
-def fileRead():
-    test = []
-    for line in open('test.txt', 'r').readlines():
-        test.append(line.strip())
-        print(line)
-        Plane(line)
-
-fileWrite()
-fileRead()
+# def fileWrite():
+# 
+#     file = open("test.txt","w")
+#     for i in range(50):
+#         file.write(str(randSmallPlane())+'\n')
+#     file.close()
+# 
+# # File read for random plane test data
+# def fileRead():
+#     test = []
+#     for line in open('test.txt', 'r').readlines():
+#         test.append(line.strip())
+#         print(line)
+#         Plane(line)

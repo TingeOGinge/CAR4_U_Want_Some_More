@@ -1,23 +1,29 @@
 # 
-def findWaitingTime(planeList, n):
-    waitingTimes = [0] * n
+# def findWaitingTime(planeList, n):
+#     waitingTimes = [0] * n
+# 
+#     for i in range(1, n):
+#         waitingTimes[i] = planeList[i - 1].turnAround + waitingTimes[i - 1]
+#     return waitingTimes
     
+def findWaitingTime(planeList, n):
+    planeList[0].waitTime = 0.0
     for i in range(1, n):
-        waitingTimes[i] = planeList[i - 1].turnAround + waitingTimes[i - 1]
-    return waitingTimes
+        planeList[i].waitTime = planeList[i - 1].turnAround + planeList[i - 1].waitTime
+    return planeList
 
 # 
-def findTurnAroundtime(planeList, n, waitingTimes):
+def findTurnAroundtime(planeList, n):
     turnAroundTimes = [0] * n
     for i in range(n):
-        turnAroundTimes[i] = planeList[i].turnAround + waitingTimes[i]
+        turnAroundTimes[i] = planeList[i].turnAround + planeList[i].waitTime
     return turnAroundTimes
 
 # Table Formatting
 def printResults(planeList, n):
     
-    waitingTimes = findWaitingTime(planeList, n)    
-    turnAroundTimes = findTurnAroundtime(planeList, n, waitingTimes)
+    # waitingTimes = findWaitingTime(planeList, n)    
+    turnAroundTimes = findTurnAroundtime(planeList, n)
     headings = ["Planes", "Fuel (T)", "Passengers (T)", "Burst (T)", "Wait (T)", "Turn Around (T)", "Priority"]
     for h in headings:
         print("{0:<18}".format(h), end="")
@@ -27,12 +33,12 @@ def printResults(planeList, n):
     totalTurnAroundTime = 0
     
     for i in range(n):
-        totalWaitTime += waitingTimes[i]
+        totalWaitTime += planeList[i].waitTime
         totalTurnAroundTime += turnAroundTimes[i]
         print("{0:18}{1:<18.3f}{2:<18.3f}{3:<18.3f}{4:<18.3f}{5:<18.3f}{6:<18.3f}".format(
         planeList[i].id, (planeList[i].capacity - planeList[i].fuel), 
         (planeList[i].passengers * 2 ), planeList[i].turnAround, 
-        waitingTimes[i], turnAroundTimes[i], planeList[i].priority))
+        planeList[i].waitTime, turnAroundTimes[i], (planeList[i].waitTime / planeList[i].turnAround)))
     print("\nAverage waiting time = {0:.3f}".format(totalWaitTime / n))
     print("Average turn around time = {0:.3f} \n\n".format(totalTurnAroundTime / n))
 
@@ -53,10 +59,12 @@ def printScheduleOrder(planeList, scheduleType):
 def priorityScheduling(planeList):
     planeList = sorted(planeList, key = lambda planeList:planeList.priority,  
                                                                 reverse = True)
+    findWaitingTime(planeList, len(planeList))
     return planeList
 
 #shortcut to print 
 def firstComeFirstServeScheduling(planeList, n):
+    planeList = findWaitingTime(planeList, len(planeList))
     printScheduleOrder(planeList, "FCFS")
     printResults(planeList, n)
 
@@ -64,6 +72,7 @@ def firstComeFirstServeScheduling(planeList, n):
 def shortestJobFirstNp(planeList):
     planeList = sorted(planeList, key = lambda planeList:planeList.turnAround, 
                                                                 reverse = False)
+    planeList = findWaitingTime(planeList, len(planeList))
     return planeList
     
 # Round Robin
@@ -96,13 +105,16 @@ def shortestRemainingTime(planeList):
 #     planeList = sorted(planeList, key lambda planeList:planeList.)
 
 # Highest Response Ration Next
+def highestResponseRatioNext(planeList):
+    # planeList = findWaitingTime(planeList, len(planeList))
+    planeList = sorted(planeList, key = lambda planeList:planeList.priority,  
+                                                                reverse = False)
+    return planeList
+    
 def highestResponseRatioNext2(planeList):
-    waitingTimes = findWaitingTime(planeList, len(planeList))
-    for t in range(len(planeList)):
-        currentPlane = planeList[t]
-        planeList[t].priority = \
-        (waitingTimes[t] + currentPlane.turnAround / currentPlane.turnAround)
-    planeList = priorityScheduling(planeList)
+    planeList = findWaitingTime(planeList, len(planeList))
+    planeList = sorted(planeList, key = lambda planeList:(planeList.waitTime / planeList.turnAround),  
+                                                                reverse = False)
     return planeList
     
 
