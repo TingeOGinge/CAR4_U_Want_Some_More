@@ -4,6 +4,10 @@ import string
 import csv
 from Plane import Plane
 
+#------------------------------------------------------------------------------#
+#                                RANDOM DATA GENERATION:                       #
+#------------------------------------------------------------------------------#
+
 # Random data generation for larger planes
 def randBigPlane():
     randID = ''.join(random.choice(string.ascii_uppercase) for i in range(2)) + str(randint(100,999))
@@ -20,18 +24,22 @@ def randSmallPlane():
     passengers = randint(2, 25)
     return Plane(randID, fuel, capacity, passengers, 0)
 
+#------------------------------------------------------------------------------#
+#                       FILE READ/WRITE FOR STATIC DATASETS:                   #
+#------------------------------------------------------------------------------#
+
 # File write for random plane test data
-# def fileWrite():
-# 
-#     file = open("test.txt","w")
-#     for i in range(50):
-#         file.write(str(randSmallPlane())+'\n')
-#     file.close()
-# 
-# # File read for random plane test data
-# def fileRead():
-#     test = []
-#     for line in open('test.txt', 'r').readlines():
-#         test.append(line.strip())
-#         print(line)
-#         Plane(line)
+def fileWrite():
+    file = open("test.txt","w")
+    for i in range(50):
+        file.write(str(randSmallPlane())+'\n')
+    file.close()
+
+# File read for random plane test data
+def fileRead():
+    test = []
+    for line in open('test.txt', 'r').readlines():
+        test.append(line.strip())
+
+fileWrite()
+fileRead()
