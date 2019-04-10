@@ -1,5 +1,6 @@
 from Plane import Plane
 from Algorithms import *
+from random import randrange
         
 def main():
                   #ID,#fuel,#capacity,passengers,priority
@@ -9,20 +10,31 @@ def main():
     BB456 = Plane("BB456", 310.0, 400.0, 234, 1)
     HL666 = Plane("HL666", 510.0, 550, 275, 1)
     
-    planeList = [LF333, LF233, LF133, BB456, HL666]
+    smallPlaneList = [LF333, LF233, LF133]
+    bigPlaneList = [BB456, HL666]
     
-    planeListPriority = priorityScheduling(planeList, len(planeList))
+    aggregatePlaneList = []
     
-    printScheduleOrder(planeListPriority, "priority")
-    printResults(planeListPriority, len(planeList))
+    for i in range(5):
+        smallPlaneTotal = randrange(7, 11)
+        for j in range(smallPlaneTotal):
+            index = randrange(0, len(smallPlaneList))
+            aggregatePlaneList.append(smallPlaneList[index])
+        index = randrange(0, len(bigPlaneList))
+        aggregatePlaneList.append(bigPlaneList[index])
     
-    planeListHybrid = shortestJobFirstNp(planeList, len(planeList))
-    planeListHybrid = priorityScheduling(planeListHybrid, len(planeList))
+    
+    
+    # planeListPriority = priorityScheduling(planeList, len(planeList))
+    # 
+    # printScheduleOrder(planeListPriority, "Priority")
+    # printResults(planeListPriority, len(planeList))
+    # 
+    planeListHybrid = shortestJobFirstNp(aggregatePlaneList, len(aggregatePlaneList))
+    planeListHybrid = priorityScheduling(planeListHybrid, len(planeListHybrid))
     
     printScheduleOrder(planeListHybrid, "SJF + Priority")
-    printResults(planeListHybrid, len(planeList))
-    
-    
+    printResults(planeListHybrid, len(planeListHybrid))      
     
      
 main()

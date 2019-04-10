@@ -6,7 +6,6 @@ class Plane:
         self.passengers = passengers
         self.turnAround = (capacity - fuel) + (passengers * 2)
         self.priority = priority
-        self.waitTime = 0.0
         
     def info(self):
         breakdown = "ID: {0}".format(self.id) \
@@ -14,6 +13,5 @@ class Plane:
             + "Capacity: {0:.2f} \n".format(self.capacity) \
             + "Passengers: {0:.2f} \n".format(self.passengers) \
             + "Turn Around: {0:f} \n".format(self.turnAround) \
-            + "High Priority: {0} \n".format(self.priority) \
-            + "Current wait time: {0:.2f} \n".format(self.waitTime) 
+            + "High Priority: {0} \n".format(self.priority)
         return breakdown
