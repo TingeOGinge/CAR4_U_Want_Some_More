@@ -1,6 +1,9 @@
 from Plane import Plane
 from Algorithms import *
 from random import *
+from data_parsing import *
+import string 
+from string import *
 
 def fcfs(planeList):
     firstComeFirstServeScheduling(planeList, len(planeList))
@@ -15,6 +18,10 @@ def sjfpr_hybrid(planeList):
     planeListHybrid = priorityScheduling(planeListHybrid)
     printScheduleOrder(planeListHybrid, "SJF + Priority")
     printResults(planeListHybrid, len(planeListHybrid)) 
+
+def highestrrn(planeList):
+    planeListHRRN = highestResponseRatioNext2(planeList) 
+    printResults(planeListHRRN, len(planeListHRRN))
         
 def main():
                   #ID,#fuel,#capacity,passengers,priority
@@ -23,6 +30,11 @@ def main():
     LF133 = Plane("LF133", 7.0, 23.0, 12, 0)
     BB456 = Plane("BB456", 310.0, 400.0, 234, 1)
     HL666 = Plane("HL666", 510.0, 550, 275, 1)
+    
+    largePlaneList = []
+    
+    for i in range(50):
+        largePlaneList.append(randBigPlane())
     
     # smallPlaneList = [LF333, LF233, LF133]
     # bigPlaneList = [BB456, HL666]
@@ -43,6 +55,7 @@ def main():
     fcfs(planeList)
     priority(planeList)
     sjfpr_hybrid(planeList)
+    highestrrn(largePlaneList)
     
 main()
     
