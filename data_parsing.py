@@ -14,7 +14,8 @@ def randBigPlane():
     fuel = randint(300, 550)
     capacity = fuel + randint(10, 100)
     passengers = randint(200, 300)
-    return Plane(randID, fuel, capacity, passengers, 1)
+    arrival = randint(0,1200)
+    return Plane(randID, fuel, capacity, passengers, 1, arrival)
 
 # Random data generation for smaller planes
 def randSmallPlane():
@@ -22,7 +23,8 @@ def randSmallPlane():
     fuel = randint(5, 15)
     capacity = fuel + randint(5, 15)
     passengers = randint(2, 25)
-    return Plane(randID, fuel, capacity, passengers, 0)
+    arrival = randint(0,1200)
+    return Plane(randID, fuel, capacity, passengers, 0, arrival)
 
 #------------------------------------------------------------------------------#
 #                       FILE READ/WRITE FOR STATIC DATASETS:                   #

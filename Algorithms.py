@@ -33,9 +33,9 @@ def printResults(planeList, n):
     # waitingTimes = findWaitingTime(planeList, n)
     turnAroundTimes = findTurnAroundtime(planeList, n)
     #Table heading formatting
-    headings = ["Planes", "Fuel (T)", "Passengers (T)", "Burst (T)", "Wait (T)", "Turn Around (T)", "Priority"]
+    headings = ["Planes", "Arrival (T)", "Fueling (T)", "Passenger I/O (T)", "Burst (T)", "Wait (T)", "Turn Around (T)", "Priority"]
     for h in headings:
-        print("{0:<18}".format(h), end="")
+        print("{0:<20}".format(h), end="")
     print("")
 
     totalWaitTime = 0
@@ -45,8 +45,8 @@ def printResults(planeList, n):
         totalWaitTime += planeList[i].waitTime
         totalTurnAroundTime += turnAroundTimes[i]
         #Table data formatting
-        print("{0:18}{1:<18.3f}{2:<18.3f}{3:<18.3f}{4:<18.3f}{5:<18.3f}{6:<18.3f}".format(
-        planeList[i].id, (planeList[i].capacity - planeList[i].fuel),
+        print("{0:20}{1:<20.3f}{2:<20.3f}{3:<20.3f}{4:<20.3f}{5:<20.3f}{6:<20.3f}{7:<20.3f}".format(
+        planeList[i].id, planeList[i].arrival, (planeList[i].capacity - planeList[i].fuel),
         (planeList[i].passengers * 2 ), planeList[i].turnAround,
         planeList[i].waitTime, turnAroundTimes[i], (planeList[i].waitTime / planeList[i].turnAround)))
     print("\nAverage waiting time = {0:.3f}".format(totalWaitTime / n))

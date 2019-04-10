@@ -66,16 +66,18 @@ def largePlanesTestData():
 
 # List generations for Small Plane Data Sets
 def smallPlanesTestData():
-        smallPlaneList = []
-        for i in range(int(input("How Many Small Planes?: "))):
-            smallPlaneList.append(randSmallPlane())
-        return smallPlaneList
+    smallPlaneList = []
+    for i in range(int(input("How Many Small Planes?: "))):
+        smallPlaneList.append(randSmallPlane())
+    return smallPlaneList
 
 #------------------------------------------------------------------------------#
 #                                   MAIN:                                      #
 #------------------------------------------------------------------------------#
 
 def main():
+
+    fcfs(largePlanesTestData())
 
     # LIST OF EXAMPLE CALLS:
     # fcfs(smallPlaneList)
