@@ -113,16 +113,45 @@ def shortestJobFirstNp(planeList):
 #
 #     planeList = sorted(planeList, key lambda planeList:planeList.)
 
-# Highest Response Ration Next
+# Highest Response Ratio Next
 def highestResponseRatioNext(planeList):
-    # planeList = findWaitingTime(planeList, len(planeList))
-    planeList = sorted(planeList, key = lambda planeList:planeList.priority,
+    # Step 1: Calculate clock time (firstProcess.turnAround + fP.arrival)
+    # 2: Sort planes by arrival time
+    # 3: pop.() the first process into the completed list (hrrnPlaneList)
+    # 4: Now the fun part 
+    # 5: The following processes continue until planeList is empty
+    # 6: Loop through the planes calculating their wait time and adding them to the arrivedPlanes list 
+    # 7: Sort arrived planes by HRRN with the largest value first 
+    # 8: pop.() the first value into the hrrnPlaneList and repeat 
+    hrrnPlaneList = []
+    planeList = sorted(planeList, key = lambda planeList:planeList.arrival, 
                                                                 reverse = False)
-    return planeList
+    
+    clock = planeList[0].turnAround + planeList[0].arrival
+    hrrnPlaneList.append(planeList.pop(0))
+    
+    arrivedPlanes = []
+    while len(planeList > 0):
+        for i in range(len(planeList)):
+            if planeList[i].arrival <= clock:
+                planeList[i].waitTime = clock - planeList[i].arrival
+                arrivedPlanes.add(planeList.pop(i))
+            else:
+                break
+        arrivedPlanes = sorted(arrivedPlanes, key = lambda arrivedPlanes: (
+            (arrivedPlanes.waitTime + arrivedPlanes.turnAround) / 
+            arrivedPlanes.turnAround), 
+            reverse = True)
+        hrrnPlaneList.append(arrivedPlanes.pop[0])
+    
+    return hrrnPlaneList
+    
+    
 
 def highestResponseRatioNext2(planeList):
     planeList = findWaitingTime(planeList, len(planeList))
-    planeList = sorted(planeList, key = lambda planeList:(planeList.waitTime / planeList.turnAround),
+    planeList = sorted(planeList, key = lambda planeList:(
+        planeList.waitTime + planeList.turnAround / planeList.turnAround),
                                                                 reverse = False)
     return planeList
 
