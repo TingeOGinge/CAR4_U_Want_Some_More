@@ -44,4 +44,3 @@ def fileRead():
         test.append(line.strip())
 
 fileWrite()
-fileRead()

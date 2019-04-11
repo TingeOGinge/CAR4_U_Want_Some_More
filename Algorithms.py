@@ -48,15 +48,17 @@ def printResults(planeList, n):
         print("{0:20}{1:<20.3f}{2:<20.3f}{3:<20.3f}{4:<20.3f}{5:<20.3f}{6:<20.3f}{7:<20.3f}".format(
         planeList[i].id, planeList[i].arrival, (planeList[i].capacity - planeList[i].fuel),
         (planeList[i].passengers * 2 ), planeList[i].turnAround,
-        planeList[i].waitTime, turnAroundTimes[i], (planeList[i].waitTime / planeList[i].turnAround)))
+        planeList[i].waitTime, turnAroundTimes[i], planeList[i].priority))
     print("\nAverage waiting time = {0:.3f}".format(totalWaitTime / n))
     print("Average turn around time = {0:.3f} \n\n".format(totalTurnAroundTime / n))
 
 # Printing the list of planes
 def printScheduleOrder(planeList, scheduleType):
-    print("Ordered via {0}: ".format(scheduleType), end="")
+    print(planeList)
+    print("Ordered via {0}: ".format(scheduleType))
     for plane in planeList:
-        print("{0}: ".format(plane.id), end=" ")
+        print(plane.info())
+        # print("{0}: ".format(plane.id), end=" ")
     print("\n")
 
 
@@ -131,18 +133,37 @@ def highestResponseRatioNext(planeList):
     hrrnPlaneList.append(planeList.pop(0))
     
     arrivedPlanes = []
-    while len(planeList > 0):
+    while len(planeList) > 0:
+        # Loop through plane list
         for i in range(len(planeList)):
+            # print(len(planeList))
+            # adding all planes that have arrived to arrival list 
             if planeList[i].arrival <= clock:
                 planeList[i].waitTime = clock - planeList[i].arrival
-                arrivedPlanes.add(planeList.pop(i))
-            else:
+                arrivedPlanes.append(planeList[i])
+            # adding next process if gap occurs
+            elif i == 0:
+                clock = planeList[i].arrival + planeList[i].turnAround
+                arrivedPlanes.append(planeList[i])
                 break
+            else: 
+                break
+        # Remove arrive planes from list
+        del planeList[:i+1]
+        # sort arrived planes by response ratio
         arrivedPlanes = sorted(arrivedPlanes, key = lambda arrivedPlanes: (
             (arrivedPlanes.waitTime + arrivedPlanes.turnAround) / 
             arrivedPlanes.turnAround), 
             reverse = True)
-        hrrnPlaneList.append(arrivedPlanes.pop[0])
+        # increment via previous process time
+        clock += arrivedPlanes[0].turnAround
+        # take value with hrr and add to hrrnPlaneList
+        hrrnPlaneList.append(arrivedPlanes.pop(0))
+
+    
+    # arrivedPlanes = findWaitingTime(arrivedPlanes, len(arrivedPlanes)) # I know this line is wrong
+    hrrnPlaneList.append(arrivedPlanes)
+    print(len(hrrnPlaneList))
     
     return hrrnPlaneList
     

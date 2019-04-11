@@ -49,7 +49,7 @@ def sjfpr_hybrid(planeList):
 #------------------------------------------------------------------------------#
 
 def highestrrn(planeList):
-    planeListHRRN = highestResponseRatioNext2(planeList)
+    planeListHRRN = highestResponseRatioNext(planeList)
     printScheduleOrder(planeListHRRN, "Highest Response Ratio Next")
     printResults(planeListHRRN, len(planeListHRRN))
 
@@ -77,7 +77,10 @@ def smallPlanesTestData():
 
 def main():
 
-    fcfs(largePlanesTestData())
+    # highestrrn(largePlanesTestData())
+    
+    # fcfs(largePlanesTestData())
+    highestrrn(largePlanesTestData())
 
     # LIST OF EXAMPLE CALLS:
     # fcfs(smallPlaneList)
