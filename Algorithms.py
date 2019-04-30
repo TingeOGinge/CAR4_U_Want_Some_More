@@ -171,9 +171,10 @@ def highestResponseRatioNext(planeList):
 
 def highestResponseRatioNext2(planeList):
     planeList = findWaitingTime(planeList, len(planeList))
-    planeList = sorted(planeList, key = lambda planeList:(
-        planeList.waitTime + planeList.turnAround / planeList.turnAround),
-                                                                reverse = False)
+    planeList = sorted(planeList, key = lambda planeList: (
+        (planeList.waitTime + planeList.turnAround) / 
+        planeList.turnAround), 
+        reverse = False)
     return planeList
 
 #------------------------------------------------------------------------------#
